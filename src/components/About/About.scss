@@ -1,0 +1,230 @@
+@import "../../assets/global-styles/global-styles";
+
+#about {
+    height: 100vh;
+    width: 100%;
+    padding: 6rem 1rem 0;
+    background: $background;
+    position: relative;
+
+    .scene {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        .scene-pattern {
+            height: 32rem;
+            width: 100rem;
+            background: $primary;
+            opacity: 0.8;
+            filter: blur(2rem);
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translateX(-35%) rotateX(-30deg) rotateY(45deg);
+            transform-style: preserve-3d;
+        }
+
+        .cube {
+            width: 12rem;
+            height: 12rem;
+            position: absolute;
+            right: 0;
+            top: 55%;
+            transform-style: preserve-3d;
+
+            .cube-face {
+                width: 12rem;
+                height: 12rem;
+                position: absolute;
+                transform: rotateY(calc(90deg * var(--i))) translateZ(6rem);
+            }
+
+            .cube-face-left {
+                background: rgb(55, 46, 194);
+            }
+
+            .cube-face-front {
+                background: rgb(75, 63, 250);
+            }
+
+            .cube-face-top {
+                background: rgb(102, 85, 255);
+                transform: rotateX(90deg) translateZ(6rem);
+            }
+
+            .cube-face-bottom {
+                background: rgba(0, 0, 0, 0.4);
+                transform: rotateX(90deg) translateZ(-6rem);
+                -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+            }
+        }
+        
+        .cube.small {
+            width: 4rem;
+            height: 4rem;
+            position: absolute;
+            right: 55%;
+            top: 70%;
+            
+            .cube-face {
+                height: 4rem;
+                width: 4rem;
+                transform: rotateY(calc(90deg * var(--i))) translateZ(2rem);
+            }
+
+            .cube-face-left {
+                background: rgb(255, 26, 219);
+            }
+
+            .cube-face-front {
+                background: rgb(255, 86, 219);
+            }
+
+            .cube-face-top {
+                background: rgb(255, 146, 219);
+                transform: rotateX(90deg) translateZ(2rem);
+            }
+
+            .cube-face-bottom {
+                background: rgba(0, 0, 0, 0.4);
+                transform: rotateX(90deg) translateZ(-2rem);
+                -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.4));
+            }
+        }
+
+        .cube.small:nth-child(4) {
+            right: 70%;
+            top: 85%;
+
+            .cube-face-front {
+                background: rgb(247, 168, 51);
+            }
+
+            .cube-face-left {
+                background: rgb(199, 133, 53);
+            }
+
+            .cube-face-top {
+                background: rgb(255, 249, 79);
+            }
+        }
+    }
+
+    .about-content {
+        position: relative;
+        z-index: 1;
+
+        h1 {
+            font-size: 1rem;
+        }
+    
+        h2 {
+            margin: 1.5rem 0;
+            font-size: 2rem;
+        }
+    
+        .contact-btn {
+            height: 3rem;
+            width: 10rem;
+            border: $secondary solid 0.15rem;
+            border-radius: 10rem;
+            color: $on-background;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 3rem;
+        }
+
+        .contact-btn:active, .contact-btn:hover {
+            background: $secondary;
+            box-shadow: 0 0 0.5rem rgba(3, 218, 198, 0.8),
+                        0 0 1rem rgba(3, 218, 198, 0.6),
+                        0 0 1.5rem rgba(3, 218, 198, 0.4),
+                        0 0 2rem rgba(3, 218, 198, 0.2);
+            color: $on-primary;
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #about {
+        .scene {
+            .cube.small.upper {
+                right: 45%;
+                top: 70%;                
+            }
+
+            .cube.small.lower {
+                right: 60%;
+                top: 85%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #about {
+        .scene {
+            .cube.small {
+                right: 35%;
+                top: 40%;
+            }
+
+            .cube.small:nth-child(4) {
+                right: 50%;
+                top: 65%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #about {
+        padding: 0;
+
+        .scene {
+            left: auto;
+            right: 0;
+
+            .cube {
+                width: 16rem;
+                height: 16rem;
+                top: 40%;
+                transform: translate(30%, -50%) rotateX(-30deg) rotateY(-45deg);
+
+                .cube-face {
+                    width: 16rem;
+                    height: 16rem;
+                    transform: rotateY(calc(90deg * var(--i))) translateZ(8rem);
+                }
+
+                .cube-face-top {
+                    transform: rotateX(90deg) translateZ(8rem);
+                }
+
+                .cube-face-bottom {
+                    transform: rotateX(90deg) translateZ(-8rem);
+                }
+            }
+        }
+
+        .about-content {
+            width: 50%;
+            padding: 4rem 2rem;
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact-btn {
+                transition: 0.4s;
+            }
+        }
+    }
+}

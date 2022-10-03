@@ -1,0 +1,149 @@
+@import "../../assets/global-styles/global-styles";
+
+#works {
+    min-height: 80vh;
+    width: 100%;
+    margin: 2rem 0;
+    background: $background;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .back-btn, .forward-btn {
+        height: 3rem;
+        width: 3rem;
+        background: $secondary;
+        border-radius: 10rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+
+    button:active {
+        background: $secondary-variant;
+    }
+
+    .back-btn {
+        left: 0;
+    }
+
+    .forward-btn {
+        right: 0;
+    }
+
+    .work-content {
+        width: 100%;
+        margin-bottom: 2rem;
+        padding: 0 3rem;
+        background: $background;
+        text-align: center;
+        transform-origin: center;
+
+        .illustrator {
+            margin-bottom: 1rem;
+
+            img {
+                width: 100%;
+                border-radius: 1rem;
+            }
+        }
+
+        .text {
+            button {
+                color: $on-background;
+                font-size: 1.5rem;
+                font-weight: 700;
+                text-decoration: underline;
+            }
+    
+            p {
+                margin: 1rem 0;
+            }
+        }
+
+        .see-more-btn:active {
+            background: $secondary-variant;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #works {
+        min-height: auto;
+        margin: 3rem 0;
+
+        .back-btn, .forward-btn {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 0;
+            top: calc(100% - 4rem);
+            transform: none;
+        }
+
+        .back-btn {
+            left: 50%;
+        }
+    
+        .forward-btn {
+            right: calc(50% - 8rem);
+        }
+
+        .work-content {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            
+            .illustrator {
+                width: 50%;
+                margin: 0;
+
+                img {
+                    height: 100%;
+                    border-radius: 0;
+                }
+            }
+
+            .text {
+                width: 50%;
+                padding: 1rem;
+                text-align: left;
+
+                button {
+                    font-size: 1.75rem;
+                }
+            }
+        }
+
+        .my-dribble {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #works {
+        .work-content {
+            .text {
+                padding: 2rem;
+
+                button {
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .my-dribble {
+            bottom: 1rem;
+            right: 1rem;
+        }
+    }
+}
