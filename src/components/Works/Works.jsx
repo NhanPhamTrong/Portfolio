@@ -51,7 +51,7 @@ const animation = {
 const variants = {
     enter: (direction) => {
         return {
-            x: direction > 0 ? 100 : -100,
+            x: direction > 0 ? 50 : -50,
             opacity: 0
         }
     },
@@ -63,7 +63,7 @@ const variants = {
     exit: (direction) => {
         return {
             zIndex: 0,
-            x: direction < 0 ? 100 : -100,
+            x: direction < 0 ? 50 : -50,
             opacity: 0
         }
     }
@@ -121,8 +121,21 @@ export const Works = () => {
                         />
                     </div>
                     <div className="text">
-                        <button type="button" onClick={() => {openInNewTab(workList[workIndex].link)}}>{workList[workIndex].title}</button>
-                        <p>{workList[workIndex].description}</p>
+                        <motion.div className="container"
+                            key={page}
+                            workIndex={workIndex}
+                            custom={direction}
+                            variants={variants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                            transition={{
+                                x: { type: "spring", stiffness: 300, damping: 30 },
+                                opacity: { duration: 0.4 }
+                            }}>
+                                <button type="button" onClick={() => {openInNewTab(workList[workIndex].link)}}>{workList[workIndex].title}</button>
+                                <p>{workList[workIndex].description}</p>
+                        </motion.div>
                     </div>
                 </AnimatePresence>
             </motion.div>
