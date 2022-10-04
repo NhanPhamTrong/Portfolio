@@ -1,6 +1,5 @@
 import { useState } from "react"
 import "./Navbar.scss"
-import $ from "jquery"
 
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -11,10 +10,6 @@ export const Navbar = () => {
 
     const ClickNavLink = () => {
         setIsOpen(false)
-    }
-
-    if ($(window).width() < 975) {
-        document.body.classList = isOpen ? "active-navbar" : ""
     }
 
     return (
