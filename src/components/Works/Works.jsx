@@ -1,7 +1,8 @@
 import "./Works.scss"
-import { motion, useAnimation } from "framer-motion"
+import { motion, useAnimation, AnimatePresence } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { useEffect, useState } from "react"
+import { wrap } from "popmotion"
 import toDoApp from "../../assets/images/to-do-app.PNG"
 
 const workList = [
@@ -47,6 +48,31 @@ const animation = {
     hidden: { opacity: 0 }
 }
 
+const variants = {
+    enter: (direction) => {
+        return {
+            x: direction > 0 ? 100 : -100,
+            opacity: 0
+        }
+    },
+    center: {
+        zIndex: 1,
+        x: 0,
+        opacity: 1
+    },
+    exit: (direction) => {
+        return {
+            zIndex: 0,
+            x: direction < 0 ? 100 : -100,
+            opacity: 0
+        }
+    }
+}
+
+const openInNewTab = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
 export const Works = () => {
     const control = useAnimation()
     const [ref, inView] = useInView()
@@ -57,34 +83,20 @@ export const Works = () => {
         }
     }, [control, inView])
 
-    const [count, setCount] = useState(0)
+    const [[page, direction], setPage] = useState([0, 0])
+    
+    const workIndex = wrap(0, workList.length, page)
 
-    const ClickBack = () => {
-        control.start("hidden")
-        setTimeout(() => {
-            setCount(count !== 0 ? count - 1 : workList.length - 1)
-            control.start("visible")
-        }, 400)
-    }
-
-    const ClickForward = () => {
-        control.start("hidden")
-        setTimeout(() => {
-            setCount(count === workList.length - 1 ? 0 : count + 1)
-            control.start("visible")
-        }, 400)
-    }
-
-    const openInNewTab = (url) => {
-        window.open(url, '_blank', 'noopener,noreferrer');
+    const paginate = (newDirection) => {
+        setPage([page + newDirection, newDirection])
     }
 
     return (
         <div id="works">            
-            <button className="back-btn" type="button" onClick={ClickBack}>
+            <button className="back-btn" type="button" onClick={() => paginate(-1)}>
                 <ion-icon name="chevron-back-outline"></ion-icon>
             </button>
-            <button className="forward-btn" type="button" onClick={ClickForward}>
+            <button className="forward-btn" type="button" onClick={() => paginate(1)}>
                 <ion-icon name="chevron-forward-outline"></ion-icon>
             </button>
             <motion.div className="work-content"
@@ -92,13 +104,27 @@ export const Works = () => {
                 variants={animation}
                 animate={control}
                 initial="hidden">
+                <AnimatePresence custom={direction}>
                     <div className="illustrator">
-                        <img src={workList[count].image} alt="" />
+                        <motion.img alt=""
+                            key={page}
+                            src={workList[workIndex].image}
+                            custom={direction}
+                            variants={variants}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                            transition={{
+                                x: { type: "spring", stiffness: 300, damping: 30 },
+                                opacity: { duration: 0.4 }
+                            }}
+                        />
                     </div>
-                <div className="text">
-                    <button type="button" onClick={() => {openInNewTab(workList[count].link)}}>{workList[count].title}</button>
-                    <p>{workList[count].description}</p>
-                </div>
+                    <div className="text">
+                        <button type="button" onClick={() => {openInNewTab(workList[workIndex].link)}}>{workList[workIndex].title}</button>
+                        <p>{workList[workIndex].description}</p>
+                    </div>
+                </AnimatePresence>
             </motion.div>
             <button className="my-dribble" onClick={() => {openInNewTab("https://dribbble.com/Nhan_Pham")}}>
                 My Dribble
