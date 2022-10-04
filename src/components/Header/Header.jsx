@@ -7,10 +7,8 @@ export const Header = () => {
     return (
         <header>
             <div className="header-content">
-                {/* <h1>Hello, my name is Nhan</h1>
-                <h2>I'm a web designer</h2> */}
-                <h1>Heading</h1>
-                <h2>Subheading</h2>
+                <h1>Hello, my name is Nhan</h1>
+                <h2>I'm a web designer</h2>
                 <motion.div className="heading-pattern" style={{
                     translateX: "-50%",
                     translateY: useTransform(scrollYProgress, [0, 1], [0, -1400]),
